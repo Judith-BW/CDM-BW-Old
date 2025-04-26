@@ -80,7 +80,7 @@ class PersistenceLayer:
                 logger.debug(self._ctx, self._TAG, self._load_document_from_path_async.__name__, doc_path,
                              'request file: {}'.format(doc_path))
                 json_data = await adapter.read_async(doc_path)
-                print(json_data)
+                print("Hello 01")
                 if StringUtils.is_blank_by_cdm_standard(json_data):
                     error_msg = "Json Data is null or empty."
                     logger.error(self._ctx, self._TAG, self._load_document_from_path_async.__name__, doc_path,
