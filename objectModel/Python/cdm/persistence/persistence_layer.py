@@ -70,6 +70,7 @@ class PersistenceLayer:
                                              res_opt: Optional[ResolveOptions] = None) \
             -> 'CdmDocumentDefinition':
         #  go get the doc
+        print("Hello 00")
         print("hallo Mennolt 01")
         doc_content = None  # type: Optional[CdmDocumentDefinition]
         json_data = None
