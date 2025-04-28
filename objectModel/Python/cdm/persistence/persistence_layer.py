@@ -16,6 +16,8 @@ if TYPE_CHECKING:
     from cdm.storage import StorageAdapterBase
     from cdm.utilities import CopyOptions, JObject
 
+raise Exception('Test') 
+
 
 class PersistenceLayer:
     CDM_EXTENSION = '.cdm.json'
@@ -69,6 +71,7 @@ class PersistenceLayer:
             -> 'CdmDocumentDefinition':
         #  go get the doc
         print("Hello 00")
+        print("hallo Mennolt 01")
         doc_content = None  # type: Optional[CdmDocumentDefinition]
         json_data = None
         fs_modified_time = None
