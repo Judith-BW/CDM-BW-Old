@@ -16,6 +16,8 @@ if TYPE_CHECKING:
     from cdm.storage import StorageAdapterBase
     from cdm.utilities import CopyOptions, JObject
 
+raise Exception('Test') 
+
 
 class PersistenceLayer:
     CDM_EXTENSION = '.cdm.json'
