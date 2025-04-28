@@ -1299,7 +1299,7 @@ class CdmCorpusDefinition:
                                  force_reload: Optional[bool] = False, res_opt: Optional['ResolveOptions'] = None) -> Optional['CdmObject']:
         """gets an object by the path from the Corpus."""
         from cdm.persistence import PersistenceLayer
-
+        print("fetching async")
         with logger._enter_scope(self._TAG, self.ctx, self.fetch_object_async.__name__):
 
             if res_opt is None:
@@ -1311,10 +1311,12 @@ class CdmCorpusDefinition:
 
                 res_opt = res_opt.copy()
                 res_opt.shallow_validation = shallow_validation
-
+            print("fetching async, past first checks")
             object_path = self.storage.create_absolute_corpus_path(object_path, relative_object)
             document_path = object_path
             document_name_index = object_path.rfind(PersistenceLayer.CDM_EXTENSION)
+            print(f"object path: {object_path}")
+            print(f"document name index = {document_name_index}")
 
             if document_name_index != -1:
                 # if there is something after the document path, split it into document path and object path.
@@ -1336,18 +1338,21 @@ class CdmCorpusDefinition:
                     logger.error(self.ctx, self._TAG, self.fetch_object_async.__name__, obj.at_corpus_path,
                                  CdmLogCode.ERR_VALDN_INVALID_DOC, object_path)
                     return None
-
+            print("this object was valid")
             # Import here to avoid circular import
             from .cdm_entity_def import CdmEntityDefinition
             from .cdm_manifest_def import CdmManifestDefinition
 
             if document_path == object_path:
+                print("document path == object path")
                 # Log the telemetry if the document is a manifest
                 if isinstance(obj, CdmManifestDefinition):
+                    print("we are reading a manifest")
                     logger._ingest_manifest_telemetry(obj, self.ctx, CdmCorpusDefinition.__name__,
                                                       self.fetch_object_async.__name__, obj.at_corpus_path)
 
                 return obj
+                print("we are not reading a manifest")
 
             if document_name_index == -1:
                 # there is no remaining path to be loaded, so return.
