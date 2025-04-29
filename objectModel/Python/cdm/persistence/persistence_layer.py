@@ -77,6 +77,8 @@ class PersistenceLayer:
         fs_modified_time = None
         doc_path = folder._folder_path + doc_name
         adapter = self._ctx.corpus.storage.fetch_adapter(folder._namespace)  # type: StorageAdapterBase
+        #jj
+        print("jj doc_path: "+ doc_path)
 
         try:
             if adapter.can_read():
